@@ -1,0 +1,41 @@
+{
+	"name" : "Romano83/cakephp3-draft",
+	"description" : "This Draft plugin give you the ability to quickly create draft system for your models",
+	"type" : "cakephp-plugin",
+	"require" : {
+		"php" : ">=5.4.0"
+	},
+	"require-dev" : {
+		"phpunit/phpunit" : "*",
+		"cakephp/cakephp" : "~3.0",
+		"cakephp/cakephp-codesniffer" : "2.*"
+	},
+	"autoload" : {
+		"psr-4" : {
+			"Romano83\\Cakephp3Draft\\" : "src"
+		}
+	},
+	"autoload-dev" : {
+		"psr-4" : {
+			"Romano83\\Cakephp3Draft\\Test\\" : "tests",
+			"Cake\\Test\\" : "./vendor/cakephp/cakephp/tests"
+		}
+	},
+	"license" : "MIT",
+	"authors" : [{
+			"name" : "Romain Guillemin",
+			"email" : "contact@romain-guillemin.fr",
+			"homepage" : "http://www.romain-guillemin.fr",
+			"role" : "Developer"
+		}
+	],
+	"support" : {
+		"email" : "contact@romain-guillemin.fr"
+	},
+	"keywords" : [
+		"cakephp3",
+		"model",
+		"behavior",
+		"draft"
+	]
+}
