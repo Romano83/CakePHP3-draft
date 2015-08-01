@@ -33,7 +33,7 @@ class DraftBehavior extends Behavior
      * 
      * @param  \Cake\ORM\Table $table      Table instance
      * @param  array|null      $conditions Find conditions
-     * @return int                  $id         Draft Id
+     * @return int             $id         Draft Id
      */
     public function getDraftId(Table $table, $conditions = [])
     {
