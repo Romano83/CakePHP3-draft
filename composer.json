@@ -1,5 +1,5 @@
 {
-	"name" : "Romano83/cakephp3-draft",
+	"name" : "romano83/cakephp3-draft",
 	"description" : "This Draft plugin give you the ability to quickly create draft system for your models",
 	"type" : "cakephp-plugin",
 	"require" : {
