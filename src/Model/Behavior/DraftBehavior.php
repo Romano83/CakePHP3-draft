@@ -12,26 +12,26 @@ class DraftBehavior extends Behavior {
  * 
  * @var array $config
  */
-public $config = [
-	'conditions' => ['online' => -1]
-];
+	public $config = [
+		'conditions' => ['online' => -1]
+	];
 
 /**
  * Initialize Draft Behavior.
  * Merge default config and user config
  * 
- * @param  array $config Default config parameters
+ * @param array $config Default config parameters
  * @return void
  */
 	public function initialize(array $config) {
 		$this->config[$this->_table->alias()] = \array_merge($this->config, $config);
 	}
-    
+
 /**
  * Find or create new draft database entry and return entity ID
  * 
- * @param  \Cake\ORM\Table $table      Table instance
- * @param  array|null      $conditions Find conditions
+ * @param \Cake\ORM\Table $table      Table instance
+ * @param array|null      $conditions Find conditions
  *
  * @return int             $id         Draft Id
  */
@@ -53,16 +53,15 @@ public $config = [
 			return $entity->id;
 		}
 	}
-    
+
 /**
  * Delete all draft entries in database
  * 
- * @param  \Cake\ORM\Table $table Table instance
+ * @param \Cake\ORM\Table $table Table instance
  * 
  * @return bool
  */
-	public function cleanDrafts(Table $table)
-	{
+	public function cleanDrafts(Table $table) {
 		return $table->deleteAll(['online' => -1]);
 	}
 }

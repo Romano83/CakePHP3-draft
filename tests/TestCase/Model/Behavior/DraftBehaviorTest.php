@@ -11,7 +11,7 @@ use Romano83\Cakephp3Draft\Model\Behavior\DraftBehavior;
 class DraftBehaviorTest extends TestCase {
 
 	public $fixtures = [ 'plugin.Romano83\Cakephp3Draft.posts' ];
-    
+
 /**
  * setUp method
  *
@@ -33,7 +33,7 @@ class DraftBehaviorTest extends TestCase {
 
 		parent::tearDown();
 	}
-    
+
 /**
  * Test testGetDraftIdWithoutDraft
  * 
@@ -51,7 +51,7 @@ class DraftBehaviorTest extends TestCase {
  *
  * @return void
  */
-	public function testGetDraftIdWithDraftCreation() {        
+	public function testGetDraftIdWithDraftCreation() {
 		$this->Model = TableRegistry::get('Posts');
 		$this->Model->addBehavior('Romano83/Cakephp3Draft.Draft', $this->config);
 		$entity = $this->Model->newEntity($this->config['conditions']);
@@ -69,7 +69,7 @@ class DraftBehaviorTest extends TestCase {
  * Test testGetDraftIdWithDraftCreation
  *
  * @return void
- */    
+ */
 	public function testGetDraftIdWithConditions() {
 		$this->Model = TableRegistry::get('Posts');
 		$this->Model->addBehavior('Romano83/Cakephp3Draft.Draft', $this->config);
@@ -78,26 +78,26 @@ class DraftBehaviorTest extends TestCase {
 		$this->assertEquals(-1, $entity->online);
 		$this->assertEquals(2, $entity->user_id);
 	}
- 
+
 /**
  * Test testGetDraftIdWithOptions
  *
  * @return void
- */   
+ */
 	public function testGetDraftIdWithOptions() {
 		$this->Model = TableRegistry::get('Posts');
 		$this->Model->addBehavior('Romano83/Cakephp3Draft.Draft', ['conditions' => ['draft' => 1]]);
 		$draftId = $this->Model->getDraftId($this->Model);
 		$entity = $this->Model->get($draftId);
 		$this->assertEquals(0, $entity->online);
-		$this->assertEquals(1, $entity->draft);        
+		$this->assertEquals(1, $entity->draft);
 	}
- 
+
 /**
  * Test testCleanDrafts
  *
  * @return void
- */   
+ */
 	public function testCleanDrafts() {
 		$this->Model = TableRegistry::get('Posts');
 		$this->Model->addBehavior('Romano83/Cakephp3Draft.Draft', $this->config);

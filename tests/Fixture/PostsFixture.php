@@ -23,16 +23,16 @@ class PostsFixture extends TestFixture {
 			'collation' => 'utf8_general_ci'
 		]
 	];
-	
+
 	public $records = [
 		[
-			'id' => 1, 
-			'name' => 'First Article', 
-			'content' => 'First Article content', 
-			'online' => '1', 
-			'draft' => '0', 
+			'id' => 1,
+			'name' => 'First Article',
+			'content' => 'First Article content',
+			'online' => '1',
+			'draft' => '0',
 			'user_id' => '0',
-			'created' => '2007-03-18 10:39:23', 
+			'created' => '2007-03-18 10:39:23',
 			'updated' => '2007-03-18 10:41:31',
 		]
 	];
