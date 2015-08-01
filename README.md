@@ -4,6 +4,11 @@ This Draft plugin give you the ability to quickly create draft system for your m
 
 _This plugin is the [Grafikart's Cakephp-Draft plugin](https://github.com/Grafikart/CakePHP-Draft) for CakePHP 3.*_
 
+[![Build Status](https://travis-ci.org/Romano83/CakePHP3-Media.svg)](https://travis-ci.org/Romano83/CakePHP3-Media)
+[![Coverage Status](https://coveralls.io/repos/Romano83/CakePHP3-draft/badge.svg?branch=master&service=github)](https://coveralls.io/github/Romano83/CakePHP3-draft?branch=master)
+[![Latest Stable Version](https://img.shields.io/packagist/v/romano83/cakephp3-draft.svg?style=flat-square)](https://packagist.org/packages/romano83/cakephp3-draft)
+[![License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://packagist.org/packages/romano83/cakephp3-draft)
+
 ## Installation
 
 ### Requirements
