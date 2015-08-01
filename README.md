@@ -1,4 +1,4 @@
-# Romano83/cakephp3-draft plugin for CakePHP
+# Draft plugin for CakePHP 3
 
 This Draft plugin give you the ability to quickly create draft system for your models.
 
