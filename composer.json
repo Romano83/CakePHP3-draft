@@ -30,7 +30,9 @@
 		}
 	],
 	"support" : {
-		"email" : "contact@romain-guillemin.fr"
+		"email" : "contact@romain-guillemin.fr",
+		"source": "https://github.com/Romano83/CakePHP3-draft",
+		"issues": "https://github.com/Romano83/CakePHP3-draft/issues"
 	},
 	"keywords" : [
 		"cakephp3",
