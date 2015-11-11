@@ -26,7 +26,7 @@ composer require romano83/cakephp3-draft:1.*
 
 In your `config\bootstrap.php` file, add this line 
 ```php
-Plugin::load('Romano83/cakephp3-draft');
+Plugin::load('Romano83/Cakephp3Draft');
 ``` 
 Or
 ```php
