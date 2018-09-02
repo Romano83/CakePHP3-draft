@@ -24,7 +24,7 @@ class DraftBehavior extends Behavior {
  * @return void
  */
 	public function initialize(array $config) {
-		$this->config[$this->_table->alias()] = \array_merge($this->config, $config);
+		$this->config[$this->_table->getAlias()] = \array_merge($this->config, $config);
 	}
 
 /**
@@ -36,11 +36,11 @@ class DraftBehavior extends Behavior {
  * @return int             $id         Draft Id
  */
 	public function getDraftId(Table $table, $conditions = []) {
-		$conditions = array_merge($this->config[$table->alias()]['conditions'], $conditions);
+		$conditions = array_merge($this->config[$table->getAlias()]['conditions'], $conditions);
 		$result = $table->find()
 			->select(
 				[
-					'id' => $table->primaryKey()
+					'id' => $table->getPrimaryKey()
 				]
 			)
 			->andWhere($conditions)
@@ -56,9 +56,9 @@ class DraftBehavior extends Behavior {
 
 /**
  * Delete all draft entries in database
- * 
+ *
  * @param \Cake\ORM\Table $table Table instance
- * 
+ *
  * @return bool
  */
 	public function cleanDrafts(Table $table) {

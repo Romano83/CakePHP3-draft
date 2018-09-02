@@ -1,9 +1,8 @@
 <?php
 namespace Romano83\Cakephp3Draft\Test\TestCase\Model\Behavior;
 
-use Cake\ORM\TableRegistry;
+use Cake\ORM\Locator\TableLocator;
 use Cake\TestSuite\TestCase;
-use Romano83\Cakephp3Draft\Model\Behavior\DraftBehavior;
 
 /**
  * Romano83\cakephp3-draft\Model\Behavior\DraftBehavior Test Case
@@ -12,6 +11,16 @@ class DraftBehaviorTest extends TestCase {
 
 	public $fixtures = [ 'plugin.Romano83\Cakephp3Draft.posts' ];
 
+    /**
+     * @var array
+     */
+	private $config = [];
+
+    /**
+     * @var \Cake\ORM\Locator\TableLocator
+     */
+	private $tableLocator;
+
 /**
  * setUp method
  *
@@ -19,6 +28,7 @@ class DraftBehaviorTest extends TestCase {
  */
 	public function setUp() {
 		parent::setUp();
+		$this->tableLocator = new TableLocator();
 		$this->config = ['conditions' => ['online' => -1]];
 	}
 
@@ -28,8 +38,8 @@ class DraftBehaviorTest extends TestCase {
  * @return void
  */
 	public function tearDown() {
-		unset($this->Model);
-		TableRegistry::clear();
+		unset($model);
+		$this->tableLocator->clear();
 
 		parent::tearDown();
 	}
@@ -40,9 +50,9 @@ class DraftBehaviorTest extends TestCase {
  * @return void
  */
 	public function testGetDraftIdWithoutDraft() {
-		$this->Model = TableRegistry::get('Posts');
-		$this->Model->addBehavior('Romano83/Cakephp3Draft.Draft', $this->config);
-		$id = $this->Model->getDraftId($this->Model);
+		$model = $this->tableLocator->get('Posts');
+		$model->addBehavior('Romano83/Cakephp3Draft.Draft', $this->config);
+		$id = $model->getDraftId($model);
 		$this->assertEquals(2, $id);
 	}
 
@@ -52,15 +62,15 @@ class DraftBehaviorTest extends TestCase {
  * @return void
  */
 	public function testGetDraftIdWithDraftCreation() {
-		$this->Model = TableRegistry::get('Posts');
-		$this->Model->addBehavior('Romano83/Cakephp3Draft.Draft', $this->config);
-		$entity = $this->Model->newEntity($this->config['conditions']);
-		$entity = $this->Model->save($entity);
+		$model = $this->tableLocator->get('Posts');
+		$model->addBehavior('Romano83/Cakephp3Draft.Draft', $this->config);
+		$entity = $model->newEntity($this->config['conditions']);
+		$entity = $model->save($entity);
 		$this->assertEquals(2, $entity->id);
 		$this->assertEquals(-1, $entity->online);
 
-		$this->Model->getDraftId($this->Model);
-		$result = $this->Model->find()->select(['id' => $this->Model->primaryKey()])->where($this->config['conditions'])->first();
+		$model->getDraftId($model);
+		$result = $model->find()->select(['id' => $model->getPrimaryKey()])->where($this->config['conditions'])->first();
 		$this->assertInstanceOf('\Cake\ORM\Entity', $result);
 		$this->assertEquals(2, $result->id);
 	}
@@ -71,10 +81,10 @@ class DraftBehaviorTest extends TestCase {
  * @return void
  */
 	public function testGetDraftIdWithConditions() {
-		$this->Model = TableRegistry::get('Posts');
-		$this->Model->addBehavior('Romano83/Cakephp3Draft.Draft', $this->config);
-		$draftId = $this->Model->getDraftId($this->Model, ['user_id' => 2]);
-		$entity = $this->Model->get($draftId);
+		$model = $this->tableLocator->get('Posts');
+		$model->addBehavior('Romano83/Cakephp3Draft.Draft', $this->config);
+		$draftId = $model->getDraftId($model, ['user_id' => 2]);
+		$entity = $model->get($draftId);
 		$this->assertEquals(-1, $entity->online);
 		$this->assertEquals(2, $entity->user_id);
 	}
@@ -85,10 +95,10 @@ class DraftBehaviorTest extends TestCase {
  * @return void
  */
 	public function testGetDraftIdWithOptions() {
-		$this->Model = TableRegistry::get('Posts');
-		$this->Model->addBehavior('Romano83/Cakephp3Draft.Draft', ['conditions' => ['draft' => 1]]);
-		$draftId = $this->Model->getDraftId($this->Model);
-		$entity = $this->Model->get($draftId);
+		$model = $this->tableLocator->get('Posts');
+		$model->addBehavior('Romano83/Cakephp3Draft.Draft', ['conditions' => ['draft' => 1]]);
+		$draftId = $model->getDraftId($model);
+		$entity = $model->get($draftId);
 		$this->assertEquals(0, $entity->online);
 		$this->assertEquals(1, $entity->draft);
 	}
@@ -99,12 +109,12 @@ class DraftBehaviorTest extends TestCase {
  * @return void
  */
 	public function testCleanDrafts() {
-		$this->Model = TableRegistry::get('Posts');
-		$this->Model->addBehavior('Romano83/Cakephp3Draft.Draft', $this->config);
-		$this->Model->getDraftId($this->Model);
-		$result = $this->Model->cleanDrafts($this->Model);
+		$model = $this->tableLocator->get('Posts');
+		$model->addBehavior('Romano83/Cakephp3Draft.Draft', $this->config);
+		$model->getDraftId($model);
+		$result = $model->cleanDrafts($model);
 		$this->assertEquals(1, $result);
-		$draft = $this->Model->find()->select(['id' => $this->Model->primaryKey()])->where($this->config['conditions'])->first();
+		$draft = $model->find()->select(['id' => $model->getPrimaryKey()])->where($this->config['conditions'])->first();
 		$this->assertEquals(null, $draft);
 	}
 }
