@@ -72,6 +72,6 @@ class DraftBehavior extends Behavior
      */
     public function cleanDrafts(Table $table)
     {
-        return $table->deleteAll(['online' => -1]);
+        return $table->deleteAll($this->config['conditions']);
     }
 }
