@@ -15,8 +15,8 @@ class DraftBehavior extends Behavior
      * @var array $config
      */
     public $config = [
-            'conditions' => ['online' => -1]
-        ];
+        'conditions' => ['online' => -1]
+    ];
 
     /**
      * Initialize Draft Behavior.
@@ -72,6 +72,6 @@ class DraftBehavior extends Behavior
      */
     public function cleanDrafts(Table $table)
     {
-        return $table->deleteAll($this->config['conditions']);
+        return $table->deleteAll($this->config[$table->getAlias()]['conditions']);
     }
 }
